@@ -1,6 +1,9 @@
-const listingParentElement = document.getElementById('moment-detailed-serialNumber');
-const listingsNodes = listingParentElement.childNodes;
-
+const checkElement = async selector => {
+  while ( document.querySelector(selector) === null) {
+    await new Promise( resolve =>  requestAnimationFrame(resolve) )
+  }
+  return document.querySelector(selector); 
+};  
 
 function extractData(nodeList) {
   for (i = 1; i < nodeList.length; i++ ) {
@@ -24,4 +27,12 @@ function appendDPC (node, DPC) {
  node.innerHTML += ' Dollar Per Cereal: $' + DPC;
 }
 
-extractData(listingsNodes);
+function init() {
+  checkElement('#moment-detailed-serialNumber').then((selector) => {
+    const listingParentElement = document.getElementById('moment-detailed-serialNumber');
+    const listingsNodes = listingParentElement.childNodes;
+    extractData(listingsNodes);
+  });
+};
+
+init();

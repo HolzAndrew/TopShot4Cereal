@@ -2,7 +2,7 @@
 "manifest_version": 2,
 "name": "Topshot 4 Cereal",
 "description": "Chrome Extention that shows Dollars Per Cereal of a Topshop Moment",
-"version": "1.0",
+"version": "0.1.0",
 "icons": {
   "16": "logo_16.jpeg",
   "48": "logo_48.jpeg",
@@ -10,20 +10,23 @@
 },
 "content_scripts":[
     {
-      "matches":["https://nbatopshot.com/listings/*"],
-      "js": ["content.js"],
-      "run_at": "document_end"
+      "js": [
+        "./js/content.js"
+      ],
+      "matches": [
+        "*://*.nbatopshot.com/*"
+      ]
     }
   ],
 "browser_action": {
     "default_icon": "logo.jpeg"
   },
 "background": {
-      "scripts": ["background.js"],
+      "scripts": ["./js/background.js"],
       "persistent": false
     },
 "permissions": [
-    "tabs", 
+    "activeTab", 
     "https://nbatopshot.com/listings/*"
   ]
 }
